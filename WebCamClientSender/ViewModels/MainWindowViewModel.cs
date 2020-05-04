@@ -1,13 +1,11 @@
-﻿using System.Text;
-using Network;
-using Prism.Mvvm;
-using WebCamFaceTracking.Models.WebCameraManager;
+﻿using Prism.Mvvm;
+using WebCamClientSender.Models.WebCameraManager;
 
-namespace WebCamFaceTracking.ViewModels
+namespace WebCamClientSender.ViewModels
 {
     public class MainWindowViewModel : BindableBase
     {
-        private string title = "WebCamFaceTracking";
+        private string title = "WebCamClientSender";
         public string Title
         {
             get => title;

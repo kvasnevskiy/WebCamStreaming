@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace WebCamFaceTracking.Views
+namespace WebCamClientSender.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

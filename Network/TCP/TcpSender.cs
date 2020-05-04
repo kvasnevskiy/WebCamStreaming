@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Network.TCP
@@ -17,9 +12,10 @@ namespace Network.TCP
     {
         private readonly IPAddress host;
         private readonly int port;
+
         private readonly TcpClient client = new TcpClient();
         private NetworkStream stream;
-        private IFormatter formatter;
+        private readonly IFormatter formatter;
 
         public TcpSender(string host, int port)
         {
@@ -51,15 +47,6 @@ namespace Network.TCP
         {
             var container = new FrameContainer(image);
             formatter.Serialize(stream, container);
-
-            //var imageByteArray = ImageConverter.ToByteArray(image);
-
-            //Write image byte array size
-            //stream.Write(BitConverter.GetBytes(imageByteArray.Length), 0, 4);
-            //Console.WriteLine($"Image length: {imageByteArray.Length}");
-
-            //Write image byte array
-            //stream.Write(imageByteArray, 0, imageByteArray.Length);
         }
 
         public Task SendImageAsync(Image image)

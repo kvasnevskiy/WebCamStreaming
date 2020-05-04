@@ -1,10 +1,9 @@
-﻿using WebCamFaceTracking.Views;
+﻿using System.Windows;
 using Prism.Ioc;
-using Prism.Modularity;
-using System.Windows;
-using WebCamFaceTracking.Models.WebCameraManager;
+using WebCamClientSender.Models.WebCameraManager;
+using WebCamClientSender.Views;
 
-namespace WebCamFaceTracking
+namespace WebCamClientSender
 {
     /// <summary>
     /// Interaction logic for App.xaml

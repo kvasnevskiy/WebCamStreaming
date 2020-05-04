@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -51,23 +46,6 @@ namespace Network.TCP
 
                     var container = (FrameContainer)formatter.Deserialize(stream);
 
-                    ////Read image byte array size
-                    //var imageByteArray = new byte[4];
-                    //stream.Read(imageByteArray, 0, 4);
-                    //var imageByteArrayCount = BitConverter.ToInt32(imageByteArray, 0);
-
-                    //Console.WriteLine($"Image length: {imageByteArrayCount}");
-
-                    ////Read full image by portions
-                    //byte[] total = new byte[imageByteArrayCount];
-                    //byte[] buffer = new byte[256];
-
-                    //int bytesReceived = 0;
-                    //while (bytesReceived < imageByteArrayCount)
-                    //{
-                    //    bytesReceived += stream.Read(total, bytesReceived, imageByteArrayCount - bytesReceived);
-                    //}
-
                     stopWatcher.Stop();
 
                     FPS = (int)(1000 / stopWatcher.ElapsedMilliseconds);
@@ -76,7 +54,6 @@ namespace Network.TCP
 
                     stopWatcher.Reset();
 
-                    //var image = ImageConverter.FromByteArray(total);
                     OnImageReceived(container.Frame);
                 }
 

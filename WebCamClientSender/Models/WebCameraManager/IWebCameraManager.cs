@@ -1,6 +1,6 @@
 ﻿using System.Windows.Media;
 
-namespace WebCamFaceTracking.Models.WebCameraManager
+namespace WebCamClientSender.Models.WebCameraManager
 {
     public interface IWebCameraManager
     {
