@@ -1,0 +1,28 @@
+﻿<Window x:Class="WebCamFaceTracking.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:prism="http://prismlibrary.com/"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        Title="{Binding Title}" Height="400" Width="500">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="391*"/>
+            <ColumnDefinition Width="101*"/>
+        </Grid.ColumnDefinitions>
+        <Image DataContext="{Binding WebCameraManager}" Source="{Binding Frame}"
+               HorizontalAlignment="Stretch" 
+               VerticalAlignment="Stretch"
+               Width="Auto"
+               Height="Auto" Grid.ColumnSpan="2"/>
+    </Grid>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <ei:CallMethodAction MethodName="Loaded" TargetObject="{Binding}"/>
+        </i:EventTrigger>
+        <i:EventTrigger EventName="Closing">
+            <ei:CallMethodAction MethodName="Closing" TargetObject="{Binding}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+</Window>

@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebCamClientSender", "WebCamClientSender\WebCamClientSender.csproj", "{45582000-4E17-4AAB-BFF5-941A266D1D36}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebCamServerReceiver", "WebCamServerReceiver\WebCamServerReceiver.csproj", "{1FBAE69C-A009-4F72-8FD6-FF1994902552}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Network", "Network\Network.csproj", "{90B8962E-26EE-451E-A741-41CFA8A5F94D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{FC64ACBB-308F-460D-AE1E-1A8DB868DF34}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{45582000-4E17-4AAB-BFF5-941A266D1D36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45582000-4E17-4AAB-BFF5-941A266D1D36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45582000-4E17-4AAB-BFF5-941A266D1D36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45582000-4E17-4AAB-BFF5-941A266D1D36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FBAE69C-A009-4F72-8FD6-FF1994902552}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FBAE69C-A009-4F72-8FD6-FF1994902552}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FBAE69C-A009-4F72-8FD6-FF1994902552}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FBAE69C-A009-4F72-8FD6-FF1994902552}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90B8962E-26EE-451E-A741-41CFA8A5F94D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90B8962E-26EE-451E-A741-41CFA8A5F94D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90B8962E-26EE-451E-A741-41CFA8A5F94D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90B8962E-26EE-451E-A741-41CFA8A5F94D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC64ACBB-308F-460D-AE1E-1A8DB868DF34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC64ACBB-308F-460D-AE1E-1A8DB868DF34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC64ACBB-308F-460D-AE1E-1A8DB868DF34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC64ACBB-308F-460D-AE1E-1A8DB868DF34}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CBB3FEF0-55CD-4248-B4A5-1AE60CDD7EF3}
+	EndGlobalSection
+EndGlobal
