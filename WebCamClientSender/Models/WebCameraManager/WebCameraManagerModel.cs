@@ -15,7 +15,7 @@ using Prism.Mvvm;
 
 namespace WebCamClientSender.Models.WebCameraManager
 {
-    public class WebCameraManagerModel : BindableBase, IWebCameraManager
+    public class WebCameraManagerModel : BindableBase, IWebCameraManager, IDisposable
     {
         private TcpSender sender = new TcpSender(ConfigurationManager.AppSettings["receive_host"], Convert.ToInt32(ConfigurationManager.AppSettings["port"]));
 
@@ -38,6 +38,11 @@ namespace WebCamClientSender.Models.WebCameraManager
         }
 
         #endregion
+
+        ~WebCameraManagerModel()
+        {
+            Dispose();
+        }
 
         public byte[] ToByteArray(Bitmap image, ImageFormat format)
         {
@@ -78,8 +83,8 @@ namespace WebCamClientSender.Models.WebCameraManager
         {
             capture = new VideoCapture();
             capture.SetCaptureProperty(CapProp.Fps, 30);
-            capture.SetCaptureProperty(CapProp.FrameHeight, 150);
-            capture.SetCaptureProperty(CapProp.FrameWidth, 200);
+            capture.SetCaptureProperty(CapProp.FrameHeight, 600);
+            capture.SetCaptureProperty(CapProp.FrameWidth, 800);
 
             captureTimer = new Timer
             {
@@ -96,6 +101,15 @@ namespace WebCamClientSender.Models.WebCameraManager
         public void StopStreaming()
         {
             captureTimer.Stop();
+        }
+
+        public void Dispose()
+        {
+            sender?.Dispose();
+            capture?.Dispose();
+            captureTimer?.Dispose();
+
+            GC.SuppressFinalize(this);
         }
     }
 }

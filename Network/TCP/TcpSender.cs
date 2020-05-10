@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading.Tasks;
+using Core.Converters;
 
 namespace Network.TCP
 {
@@ -27,6 +29,11 @@ namespace Network.TCP
             Connect();
         }
 
+        ~TcpSender()
+        {
+            Dispose();
+        }
+
         private void Connect()
         {
             client.Connect(host, port);
@@ -45,8 +52,20 @@ namespace Network.TCP
 
         public void SendImage(Image image)
         {
-            var container = new FrameContainer(image);
-            formatter.Serialize(stream, container);
+            //var container = new FrameContainer(image);
+
+            //using (var ms = new MemoryStream())
+            //{
+                //formatter.Serialize(ms, container);
+
+                var byteArray = ImageByteConverter.ImageToByteArray(image);
+                stream.Write(BitConverter.GetBytes(byteArray.Length), 0, 4);
+
+                Console.WriteLine($"Image Length -> {byteArray.Length}");
+
+                stream.Write(byteArray, 0, byteArray.Length);
+           // }
+           
         }
 
         public Task SendImageAsync(Image image)
@@ -56,8 +75,10 @@ namespace Network.TCP
 
         public void Dispose()
         {
-            client.Close();
-            client.Dispose();
+            client?.Close();
+            client?.Dispose();
+
+            GC.SuppressFinalize(this);
         }
     }
 }
