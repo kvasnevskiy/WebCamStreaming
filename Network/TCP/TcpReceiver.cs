@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
-using System.IO;
 using System.Net;
 using System.Net.Sockets;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading;
 using System.Threading.Tasks;
 using Core.Converters;
@@ -16,7 +12,7 @@ namespace Network.TCP
     public class TcpReceiver : IDisposable
     {
         private readonly TcpListener listener;
-        private List<TcpClient> clients = new List<TcpClient>();
+        private readonly List<TcpClient> clients = new List<TcpClient>();
 
         private readonly CancellationTokenSource cancelTokenSource = new CancellationTokenSource();
 
@@ -105,58 +101,6 @@ namespace Network.TCP
                     Console.WriteLine("Подключен клиент. Выполнение запроса...");
                     ClientProcessing(client);
                 }
-
-                
-
-                //while (!cancelTokenSource.Token.IsCancellationRequested)
-                //{
-                //    Console.WriteLine("Start while...");
-
-                //    var stopWatch = new Stopwatch();
-                //    stopWatch.Start();
-
-                //    Console.WriteLine("Try get stream...");
-                    
-                //    var stream = client.GetStream();
-
-                //    Console.WriteLine("End get stream");
-
-                //    var imageLengthBuffer = new byte[4];
-
-                //    Console.WriteLine("Start read length...");
-
-                //    var imageLengthBytesCount = await stream.ReadAsync(imageLengthBuffer, 0, 4, cancelTokenSource.Token);
-
-                //    Console.WriteLine("End read length...");
-
-                //    var imageArrayLength = BitConverter.ToInt32(imageLengthBuffer, 0);
-
-                //    var buffer = new byte[imageArrayLength];
-
-                //    int bytesReceived = 0;
-                //    while (bytesReceived < imageArrayLength)
-                //    {
-                //        Console.WriteLine("Start read...");
-                //        bytesReceived += await stream.ReadAsync(buffer, bytesReceived, imageArrayLength - bytesReceived, cancelTokenSource.Token);
-                //        Console.WriteLine("End read...");
-                //    }
-
-                //    //Console.WriteLine($"Received bytes {bytesReceived}");
-
-                //    OnImageReceived(ImageByteConverter.ByteArrayToImage(buffer));
-
-                //    stopWatch.Stop();
-
-                //    FPS = (int)(1000 / stopWatch.ElapsedMilliseconds);
-
-                //    Console.WriteLine($"FPS: {FPS}");
-
-                //}
-
-                //client.Dispose();
-
-
-                //Console.WriteLine("Клиент отключен...");
 
             }, TaskCreationOptions.LongRunning);
         }
