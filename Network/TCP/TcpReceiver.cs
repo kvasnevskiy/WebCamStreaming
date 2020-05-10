@@ -16,8 +16,8 @@ namespace Network.TCP
 
         private readonly CancellationTokenSource cancelTokenSource = new CancellationTokenSource();
 
-        public event Action<Image> ImageReceived;
-        private void OnImageReceived(Image image) => ImageReceived?.Invoke(image);
+        public event Action<Image, int> ImageReceived;
+        private void OnImageReceived(Image image, int frameIndex) => ImageReceived?.Invoke(image, frameIndex);
 
         public TcpReceiver(string host, int port)
         {
@@ -74,7 +74,7 @@ namespace Network.TCP
                             Console.WriteLine("End read...");
                         }
 
-                        OnImageReceived(ImageByteConverter.ByteArrayToImage(buffer));
+                        OnImageReceived(ImageByteConverter.ByteArrayToImage(buffer), clients.IndexOf(client));
                     }
                     catch (Exception e)
                     {

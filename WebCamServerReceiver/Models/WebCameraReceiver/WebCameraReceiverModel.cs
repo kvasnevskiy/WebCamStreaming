@@ -1,20 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
-using System.Timers;
 using System.Windows;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Core.Extensions;
-using Emgu.CV;
-using Network;
 using Network.TCP;
 using Prism.Mvvm;
 
@@ -24,11 +15,11 @@ namespace WebCamServerReceiver.Models.WebCameraReceiver
     {
         private readonly TcpReceiver receiver;
 
-        private ImageSource frame;
-        public ImageSource Frame
+        private ObservableCollection<WriteableBitmap> frames;
+        public ObservableCollection<WriteableBitmap> Frames
         {
-            get => frame;
-            set => SetProperty(ref frame, value);
+            get => frames;
+            set => SetProperty(ref frames, value);
         }
 
         private Image FromByteArray(byte[] data)
@@ -43,23 +34,23 @@ namespace WebCamServerReceiver.Models.WebCameraReceiver
         {
             receiver = new TcpReceiver(ConfigurationManager.AppSettings["host"],Convert.ToInt32(ConfigurationManager.AppSettings["port"]));
             receiver.ImageReceived += OnImageReceived;
+            
+            Frames = new ObservableCollection<WriteableBitmap>();
         }
 
-        private void OnImageReceived(Image image)
+        private void OnImageReceived(Image image, int frameIndex)
         {
-            var bitmap = image as Bitmap;
-            WriteableBitmap writeableBitmap = null;
+            var currentBitmap = image as Bitmap;
 
             Application.Current?.Dispatcher.Invoke(() =>
             {
-                if (writeableBitmap == null)
+                if (Frames.Count > frameIndex)
                 {
-                    writeableBitmap = bitmap.ToWriteableBitmap();
-                    Frame = (ImageSource)writeableBitmap;
+                    Frames[frameIndex].UpdateWith(currentBitmap);
                 }
                 else
                 {
-                    writeableBitmap.UpdateWith(bitmap);
+                    Frames.Add(currentBitmap.ToWriteableBitmap());
                 }
             });
         }

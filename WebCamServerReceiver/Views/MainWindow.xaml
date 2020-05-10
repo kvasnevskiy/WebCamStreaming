@@ -4,11 +4,43 @@
         xmlns:prism="http://prismlibrary.com/"
         prism:ViewModelLocator.AutoWireViewModel="True"
         Title="{Binding Title}" Height="350" Width="525">
-    <Grid>
-        <Image DataContext="{Binding WebCameraReceiver}" Source="{Binding Frame}"
+    <ItemsControl DataContext="{Binding WebCameraReceiver}" ItemsSource="{Binding Frames}">
+        <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+                <UniformGrid Columns="2" Rows="2" />
+            </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+        <ItemsControl.ItemTemplate>
+            <DataTemplate>
+                <Image Source="{Binding}"
+                       HorizontalAlignment="Stretch" 
+                       VerticalAlignment="Stretch"
+                       Width="Auto"
+                       Height="Auto"/>
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+    </ItemsControl>
+    <!--<UniformGrid Columns="2" Rows="2">
+        
+        <Image DataContext="{Binding WebCameraReceiver}" Source="{Binding Frame1}"
                HorizontalAlignment="Stretch" 
                VerticalAlignment="Stretch"
                Width="Auto"
                Height="Auto" Grid.ColumnSpan="2"/>
-    </Grid>
+        <Image DataContext="{Binding WebCameraReceiver}" Source="{Binding Frame2}"
+               HorizontalAlignment="Stretch" 
+               VerticalAlignment="Stretch"
+               Width="Auto"
+               Height="Auto" Grid.ColumnSpan="2"/>
+        <Image DataContext="{Binding WebCameraReceiver}" Source="{Binding Frame3}"
+               HorizontalAlignment="Stretch" 
+               VerticalAlignment="Stretch"
+               Width="Auto"
+               Height="Auto" Grid.ColumnSpan="2"/>
+        <Image DataContext="{Binding WebCameraReceiver}" Source="{Binding Frame4}"
+               HorizontalAlignment="Stretch" 
+               VerticalAlignment="Stretch"
+               Width="Auto"
+               Height="Auto" Grid.ColumnSpan="2"/>
+    </UniformGrid>-->
 </Window>
